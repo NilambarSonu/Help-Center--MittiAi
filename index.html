@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitti-AI Help Center | Growing smarter, from soil to harvest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --color-primary: #10b981;
+            --color-primary-dark: #059669;
+            --color-secondary: #8b5cf6;
+            --color-accent: #f59e0b;
+            --color-bg: #0f172a;
+            --color-surface: rgba(30, 41, 59, 0.8);
+            --color-text: #f1f5f9;
+            --color-text-light: #94a3b8;
+            --color-border: rgba(16, 185, 129, 0.2);
+            --glow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: pulse 10s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #10b981, #8b5cf6, #f59e0b);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 5s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-actions {
+            margin-top: -2rem;
+            margin-bottom: 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .action-tile {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--color-text);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .action-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .action-tile:hover::before {
+            left: 100%;
+        }
+        
+        .action-tile:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4);
+            border-color: var(--color-primary);
+        }
+        
+        .action-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .action-tile:nth-child(2) .action-icon {
+            animation-delay: 0.5s;
+        }
+        
+        .action-tile:nth-child(3) .action-icon {
+            animation-delay: 1s;
+        }
+        
+        .action-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .action-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--color-primary);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+            z-index: -1;
+        }
+        
+        .filter-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--color-primary);
+            color: white;
+        }
+        
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        }
+        
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .faq-card {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .faq-card:hover {
+            box-shadow: 0 12px 48px rgba(16, 185, 129, 0.3);
+            border-color: var(--color-primary);
+        }
+        
+        .faq-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-header:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .faq-question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            flex: 1;
+        }
+        
+        .faq-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        
+        .faq-card.expanded .faq-toggle {
+            transform: rotate(135deg);
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+        }
+        
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .faq-card.expanded .faq-content {
+            max-height: 1000px;
+        }
+        
+        .faq-body {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+        
+        .faq-category {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        
+        .guide-card {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+        }
+        
+        .guide-card:hover {
+            box-shadow: 0 12px 48px rgba(16, 185, 129, 0.3);
+            border-color: var(--color-primary);
+        }
+        
+        .guide-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }
+        
+        .guide-steps {
+            list-style: none;
+            counter-reset: step;
+        }
+        
+        .guide-step {
+            counter-increment: step;
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+        
+        .guide-step:hover {
+            transform: translateX(10px);
+        }
+        
+        .guide-step::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+        }
+        
+        .contact-form {
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background: rgba(15, 23, 42, 0.5);
+            color: var(--color-text);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            background: rgba(15, 23, 42, 0.7);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        
+        .form-submit {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border: none;
+            padding: 1.25rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-submit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .form-submit:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .form-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(16, 185, 129, 0.6);
+        }
+        
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .form-message {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            border-radius: 12px;
+            font-weight: 600;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            display: block;
+        }
+        
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            display: block;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--color-text-light);
+            margin-top: 4rem;
+            border-top: 1px solid var(--color-border);
+            background: var(--color-surface);
+            backdrop-filter: blur(20px);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-text-light);
+            font-size: 1.125rem;
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .loading-spinner {
+            border: 3px solid var(--color-border);
+            border-top: 3px solid var(--color-primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">Mitti-AI Help Center</h1>
+            <p class="tagline">Growing smarter, from soil to harvest.</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="quick-actions">
+            <a href="#guide-agni" class="action-tile">
+                <svg class="action-icon" viewBox="0 0 64 64" fill="none">
+                    <circle cx="32" cy="32" r="28" fill="#10b981" opacity="0.2"/>
+                    <path d="M32 12 L32 52 M16 28 L32 12 L48 28" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="32" cy="40" r="6" fill="#f59e0b"/>
+                </svg>
+                <h2 class="action-title">Start with Agni Scanner</h2>
+                <p class="action-desc">Quick setup guide for your first scan</p>
+            </a>
+            
+            <a href="#guide-soil" class="action-tile">
+                <svg class="action-icon" viewBox="0 0 64 64" fill="none">
+                    <rect x="12" y="12" width="40" height="40" rx="4" fill="#8b5cf6" opacity="0.2"/>
+                    <path d="M20 20 L44 20 M20 28 L44 28 M20 36 L38 36" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="48" cy="48" r="10" fill="#10b981"/>
+                    <path d="M44 48 L47 51 L52 45" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <h2 class="action-title">Soil Report Explained</h2>
+                <p class="action-desc">Understand pH, NPK, and moisture levels</p>
+            </a>
+            
+            <a href="#contact" class="action-tile">
+                <svg class="action-icon" viewBox="0 0 64 64" fill="none">
+                    <rect x="18" y="8" width="28" height="48" rx="4" fill="#f59e0b" opacity="0.2"/>
+                    <rect x="22" y="14" width="20" height="32" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="2"/>
+                    <circle cx="32" cy="51" r="3" fill="#10b981"/>
+                    <path d="M28 28 L28 32 L32 36 L36 32" stroke="#f59e0b" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+                <h2 class="action-title">Device & App Support</h2>
+                <p class="action-desc">Troubleshoot and get help instantly</p>
+            </a>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Frequently Asked Questions
+            </h2>
+            
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">All Topics</button>
+                <button class="filter-btn" data-filter="getting-started">Getting Started</button>
+                <button class="filter-btn" data-filter="soil-reports">Soil Analysis</button>
+                <button class="filter-btn" data-filter="device-app">Device & App</button>
+            </div>
+            
+            <div class="faq-grid" id="faqGrid"></div>
+            <div class="no-results hidden" id="noResults">No articles found.</div>
+        </section>
+        
+        <section class="section" id="guide-agni">
+            <h2 class="section-title">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Step-by-Step Guides
+            </h2>
+            
+            <div class="guide-card">
+                <h3 class="guide-title">Setting Up Your Agni Scanner</h3>
+                <ol class="guide-steps">
+                    <li class="guide-step">Charge device fully before first use (LED turns green)</li>
+                    <li class="guide-step">Download Saathi App from Play Store or App Store</li>
+                    <li class="guide-step">Turn on Bluetooth and pair device within 10 meters</li>
+                    <li class="guide-step">Insert probe into soil 4-6 inches deep at 90° angle</li>
+                    <li class="guide-step">Wait 30 seconds for accurate reading to stabilize</li>
+                </ol>
+            </div>
+            
+            <div class="guide-card" id="guide-soil">
+                <h3 class="guide-title">Understanding Your Soil Report</h3>
+                <ol class="guide-steps">
+                    <li class="guide-step">pH Level: 6.0-7.0 is ideal for most crops (neutral soil)</li>
+                    <li class="guide-step">Nitrogen (N): Essential for leaf growth and green color</li>
+                    <li class="guide-step">Phosphorus (P): Supports root development and flowering</li>
+                    <li class="guide-step">Potassium (K): Strengthens plant immunity and disease resistance</li>
+                    <li class="guide-step">Moisture: Check levels before watering to prevent over/under-watering</li>
+                </ol>
+            </div>
+        </section>
+        
+        <section class="section" id="contact">
+            <h2 class="section-title">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                Contact Support
+            </h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label">Name *</label>
+                        <input type="text" name="Name" class="form-input" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        <input type="tel" name="Phone No." class="form-input" required placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" name="Email" class="form-input" required placeholder="Enter your email address">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Issue Category *</label>
+                        <select name="Issue Category" class="form-select" required>
+                            <option value="">Select a category</option>
+                            <option value="Agni Scanner Issue">Agni Scanner Issue</option>
+                            <option value="Soil Report Question">Soil Report Question</option>
+                            <option value="App Problem">App Problem</option>
+                            <option value="Connectivity Issue">Connectivity Issue</option>
+                            <option value="Device Not Charging">Device Not Charging</option>
+                            <option value="Calibration Problem">Calibration Problem</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Describe Your Issue *</label>
+                        <textarea name="Describe Your Issue" class="form-textarea" required placeholder="Please provide detailed information about your issue..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        <span id="submitText">Send Message</span>
+                    </button>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2024 Mitti-AI. Growing smarter together. 🌱</p>
+    </footer>
+    
+    <script>
+        const faqs = [
+            {
+                q: "How do I charge the Agni Scanner?",
+                a: "Connect the provided USB-C cable to any 5V adapter. Full charge takes 2-3 hours. LED indicator turns green when complete.",
+                cat: "getting-started"
+            },
+            {
+                q: "What do the NPK numbers mean?",
+                a: "N (Nitrogen) promotes leaf growth, P (Phosphorus) helps roots, K (Potassium) boosts immunity. Values show available nutrients in ppm.",
+                cat: "soil-reports"
+            },
+            {
+                q: "Why isn't my device connecting?",
+                a: "Ensure Bluetooth is on, device is charged, and you're within 10 meters. Try restarting both app and scanner.",
+                cat: "device-app"
+            },
+            {
+                q: "How often should I test my soil?",
+                a: "Test every 2-3 weeks during growing season, monthly otherwise. Always test after adding fertilizers or amendments.",
+                cat: "soil-reports"
+            },
+            {
+                q: "Can I use Agni in wet conditions?",
+                a: "The probe is water-resistant but avoid submerging the main unit. Wipe clean after use in muddy soil.",
+                cat: "getting-started"
+            },
+            {
+                q: "How do I calibrate the device?",
+                a: "Calibration is automatic. For best results, clean probe with soft cloth before each use and avoid extreme temperatures.",
+                cat: "device-app"
+            }
+        ];
+        
+        function renderFAQs(filter = 'all') {
+            const grid = document.getElementById('faqGrid');
+            const noResults = document.getElementById('noResults');
+            
+            let filtered = faqs.filter(f => 
+                (filter === 'all' || f.cat === filter)
+            );
+            
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                grid.innerHTML = filtered.map((f, i) => `
+                    <div class="faq-card" data-index="${i}">
+                        <div class="faq-header">
+                            <h3 class="faq-question">${f.q}</h3>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-content">
+                            <div class="faq-body">
+                                <span class="faq-category">${f.cat.replace('-', ' ')}</span>
+                                <p>${f.a}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.querySelectorAll('.faq-header').forEach(h => {
+                    h.addEventListener('click', () => {
+                        h.parentElement.classList.toggle('expanded');
+                    });
+                });
+            }
+        }
+        
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderFAQs(btn.dataset.filter);
+            });
+        });
+        
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbya9yMtIyHd5A_7ENA0CdPj9x1A_AlSuF1OSKAX2TWKhBZ5IX8c4xqki_gzttUvUEfO4w/exec';
+        
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.form-submit');
+            const submitText = document.getElementById('submitText');
+            const formMessage = document.getElementById('formMessage');
+            
+            submitBtn.disabled = true;
+            submitText.innerHTML = 'Sending... <span class="loading-spinner"></span>';
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.result === 'success') {
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✓ Thank you! Your message has been sent successfully. We will respond within 24 hours.';
+                    form.reset();
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+            } catch (error) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = '✗ Sorry, there was an error sending your message. Please try again or email us directly.';
+                console.error('Form submission error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Send Message';
+            }
+        });
+        
+        renderFAQs();
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
